@@ -18,7 +18,7 @@ app.use("/api/auth",authRoute);
 //     res.send("Hello World, Ash")
 // })
 app.listen(PORT,() => {
-    connectToMongoDB()
+    connectToMongoDB();
     console.log(`Server is Running on port ${PORT}`)
 });
 
