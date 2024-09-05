@@ -2,6 +2,8 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
 
+const secretKey = 'jIfSuZGyffKIGs88sTXmuVf9znQ7B8VXBRZAO/GD92s='
+
 const protectRoute = async(req,res,next) =>{
     try {
         const token = req.cookies.jwt;
@@ -9,7 +11,8 @@ const protectRoute = async(req,res,next) =>{
             return res.status(401).json({ error: "Unauthorized - No Token Provided"})
         }
 
-        const decoded = jwt.verify(token,process.env.JWT_SECRET);
+        console.log("Token:", token);
+        const decoded = jwt.verify(token,secretKey);
         if(!decoded){
             return res.status(401).json({ error: "Unauthorized - Invalid Token"})
 
