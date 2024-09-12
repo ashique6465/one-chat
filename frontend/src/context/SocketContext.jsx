@@ -16,14 +16,14 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (authUser) {
-      const socket = io("https://one-chat-07nb.onrender.com", {
+      const socket = io("https://one-chat-9n54.vercel.app", {
         query: {
           userId: authUser._id,
         },
       });
       setSocket(socket);
 
-      socket.on("getUsersUsers", (users) => {
+      socket.on("getOnlineUsers", (users) => {
         setOnlineUsers(users);
       });
 

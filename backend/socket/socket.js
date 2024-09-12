@@ -23,7 +23,7 @@ io.on('connection',(socket)=>{
     console.log("a user connected",socket.id);
     
     const userId = socket.handshake.query.userId;
-    if(userId != "undefined") userSocketMap[userId] = socket.id;
+    if(userId && userId != "undefined") userSocketMap[userId] = socket.id;
 
 //io.emit() is used to send events to all the connected cleints
     io.emit("getOnlineUsers",Object.keys(userSocketMap));
@@ -31,8 +31,10 @@ io.on('connection',(socket)=>{
     //socket.on() is a method used to listen to the events. can be used both on client and server side
     socket.on("disconnect",()=>{
         console.log("user disconnnected",socket.id);
+        if(userId in userSocketMap){
         delete userSocketMap[userId];
         io.emit("getOnlineUsers",Object.keys(userSocketMap));
+        }
     })
 })
 
